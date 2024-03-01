@@ -1,0 +1,23 @@
+def division_davinci_29():
+    out = []
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(("8.8.8.8", 80))
+        publip = s.getsockname()[0]
+    except Exception as e:
+        print("Error represented as: ", e)
+        publip = None
+    finally:
+        s.close()
+    out.append(publip)
+    
+    try:
+        hostname = socket.gethostname()
+        privip = socket.gethostbyname(hostname)
+    except Exception as e:
+        print("Error represented as: ", e)
+        privip = None
+    out.append(privip)
+
+    return out
