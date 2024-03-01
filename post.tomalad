@@ -1,0 +1,16 @@
+def post(host: str):
+    if host == "division-davinci-29":
+        url = 'http://127.0.0.1:5000/' # just a temporary ip, up to ngrok later on.
+        ip = division_davinci_29()
+        timestamp = datetime.fromtimestamp(time.time()).strftime('%H:%M:%S - %d/%m/%Y')
+        cinfo = {
+            "ipaddress": f"{ip[0]}",
+            "public_ip": f"{ip[1]}",
+            "name": f"{socket.gethostname()}",
+            "version": 1.2,
+            "timestamp": timestamp
+        }
+
+        jsond = json.dumps(cinfo)
+        headers = {'Content-Type': 'application/json'}
+        response = requests.post(url, data=jsond, headers=headers)
